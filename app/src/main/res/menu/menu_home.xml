@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".View.HomeActivity">
+
+    <item
+        android:id="@+id/not"
+        android:orderInCategory="300"
+        android:title="notification"
+        android:icon="@drawable/notf_norm"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/option"
+        android:orderInCategory="300"
+        android:title="options"
+        android:icon="@drawable/dots"
+        app:showAsAction="ifRoom"/>
+
+</menu>
+
+<!--
+
+        <menu>
+            <item
+                android:id="@+id/profile"
+                android:icon="@drawable/profile"
+                android:title="Profile"
+                app:showAsAction="withText"/>
+            <item
+                android:id="@+id/logout"
+                android:icon="@drawable/logout"
+                android:title="Log Out"
+                app:showAsAction="withText"/>
+        </menu>
+-->

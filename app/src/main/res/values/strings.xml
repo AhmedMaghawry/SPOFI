@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">SpotFire</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="title_activity_maps">Map</string>
+
+    <string-array name="countries_array">
+        <item>SEOUL</item>
+        <item>CAIRO</item>
+        <item>TEHRAN</item>
+        <item>Bandung</item>
+        <item>Rio de Janeiro</item>
+        <item>Sydney</item>
+        <item>HongKong</item>
+        <item>LONDON</item>
+        <item>Delhi</item>
+        <item>BEIJING</item>
+        <item>BANGKOK</item>
+        <item>New York (NY)</item>
+        <item>TOKYO</item>
+        <item>Shanghai</item>
+        <item>MEXICO (Mexico City)</item>
+        <item>Istanbul</item>
+        <item>MOSKVA (Moscow)</item>
+        <item>Karachi</item>
+        <item>JAKARTA</item>
+        <item>Bombay</item>
+        <item>São Paulo	</item>
+    </string-array>
+
+    <string name="dialog_title">Available Cities</string>
+    <string name="ok_label">OK</string>
+    <string name="dismiss_label">Dismiss</string>
+    <string name="clear_all_label">Clear all</string>
+</resources>

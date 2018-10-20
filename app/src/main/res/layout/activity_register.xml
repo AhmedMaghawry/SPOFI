@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="RegisterActivity">
+
+    <!-- Login progress -->
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/login_form">
+        <TextView
+            style="@style/text_header"
+            android:text="Register"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/reg"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            style="@style/text_header_small"
+            android:text="Create a new Account"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="5">
+            <android.support.v4.view.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:id="@+id/vpPager" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:id="@+id/rl">
+                <Button
+                    style="@style/button_style"
+                    android:text="Back"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:id="@+id/back"/>
+
+                <Button
+                    style="@style/button_style"
+                    android:text="Next"
+                    android:layout_gravity="center"
+                    android:id="@+id/next"
+                    android:layout_alignParentRight="true"/>
+
+                <Button
+                    android:background="@drawable/ok"
+                    style="@style/button_style"
+                    android:text="Finish"
+                    android:layout_gravity="center"
+                    android:id="@+id/finish"
+                    android:visibility="gone"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

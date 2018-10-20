@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".View.SecondRegFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+    <TextView
+        style="@style/text_cont"
+        android:text="Country : "/>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColorHint="@color/col2"
+        android:textColorHighlight="@color/col2"
+        android:layout_marginRight="10dp">
+
+        <com.rilixtech.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:ccp_textColor="@color/col2"
+            app:ccp_dialogTextColor="@color/col2"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            app:ccp_defaultNameCode="US"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColorHint="@color/col2"
+        android:textColorHighlight="@color/col2"
+        android:layout_marginRight="10dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="City"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/col2"
+            android:drawableLeft="@drawable/city"
+            android:drawablePadding="15dp"
+            android:textColorHint="@color/col2"
+            android:textColorHighlight="@color/col2"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:textSize="15sp"
+            style="@style/text_cont"
+            android:text="Location : "/>
+
+        <ImageButton
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/button_with_shadow"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:id="@+id/loc"
+            android:src="@drawable/marker"
+            android:layout_marginLeft="50dp"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+    </LinearLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColorHint="@color/col2"
+        android:textColorHighlight="@color/col2"
+        android:layout_marginRight="10dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Phone"
+            android:drawableLeft="@drawable/phone"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:textColor="@color/col2"
+            android:textColorHint="@color/col2"
+            android:textColorHighlight="@color/col2"
+            android:drawablePadding="15dp"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/container"/>
+</LinearLayout>
+</ScrollView>

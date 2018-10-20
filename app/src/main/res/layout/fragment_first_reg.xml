@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".View.FirstRegFragment">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColorHint="@color/col2"
+        android:textColorHighlight="@color/col2"
+        android:layout_marginRight="10dp">
+
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full Name"
+            android:drawableLeft="@drawable/user"
+            android:imeActionId="6"
+            android:drawablePadding="15dp"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionUnspecified"
+            android:maxLines="1"
+            android:textColor="@color/col2"
+            android:textColorHint="@color/col2"
+            android:textColorHighlight="@color/col2"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/col2"
+        android:textColorHighlight="@color/col2"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:textColor="@color/col2"
+            android:drawableLeft="@drawable/mail"
+            android:drawablePadding="15dp"
+            android:textColorHint="@color/col2"
+            android:textColorHighlight="@color/col2"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textColorHint="@color/col2"
+        android:textColorHighlight="@color/col2"
+        android:layout_marginRight="10dp">
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:imeActionId="6"
+            android:imeActionLabel="@string/action_sign_in_short"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:drawableLeft="@drawable/key"
+            android:drawablePadding="15dp"
+            android:textColorHint="@color/col2"
+            android:textColorHighlight="@color/col2"
+            android:textColor="@color/col2"
+            android:maxLines="1"
+            android:singleLine="true" />
+
+    </android.support.design.widget.TextInputLayout>
+
+</LinearLayout>

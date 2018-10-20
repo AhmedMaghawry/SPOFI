@@ -1,0 +1,123 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".View.HomeActivity"
+    android:background="@android:color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:id="@+id/toolbar"
+        android:background="@color/col2"
+        app:titleTextColor="@color/white"
+        android:elevation="4dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/container">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@color/white"
+            app:civ_border_color="@color/gray"
+            app:civ_border_width="1dp"
+            android:src="@drawable/ic_man"
+            android:id="@+id/profile"
+            android:layout_marginTop="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Default User"
+            android:textSize="25sp"
+            android:textColor="@color/gray"
+            android:gravity="center"
+            android:id="@+id/username"
+            android:layout_marginTop="5dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trustometer"
+                android:layout_gravity="center"
+                android:textColor="@color/gray"/>
+            <com.daimajia.numberprogressbar.NumberProgressBar
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:id="@+id/prog"
+                app:progress_max="10"
+                app:progress_current="0"
+                app:progress_text_color="@color/col1"
+                app:progress_text_size="13sp"
+                app:progress_reached_color="@color/col1"
+                app:progress_reached_bar_height="1.5dp"
+                app:progress_unreached_bar_height="0.75dp"
+                app:progress_unreached_color="@color/gray_white"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="right"
+            android:layout_marginRight="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Points : "
+                android:textColor="@color/gray"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/points"
+                android:text="0"
+                android:textSize="20sp"
+                android:textColor="@color/col5"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  pts"
+                android:textColor="@color/gray"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            android:alpha="0.5"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabMode="fixed"
+        app:tabIndicatorColor="@color/col2"
+        app:tabTextColor="@color/gray"
+        app:tabSelectedTextColor="@color/col2"
+        app:tabGravity="fill"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"  />
+</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.ProfileActivity">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/header_cover_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:background="@color/white" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                app:civ_border_color="@color/gray"
+                app:civ_border_width="1dp"
+                android:src="@drawable/ic_man"
+                android:id="@+id/profile"
+                android:layout_below="@+id/header_cover_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-60dp"
+                android:elevation="5dp"
+                android:scaleType="centerCrop"/>
+            <RelativeLayout
+                android:id="@+id/profile_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/header_cover_image"
+                android:background="@color/col2"
+                android:elevation="4dp"
+                android:gravity=""
+                android:paddingBottom="24dp">
+
+
+                <TextView
+                    android:id="@+id/user_profile_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="70dp"
+                    android:text="Profile name"
+                    android:textColor="#fff"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/user_profile_name"
+                    android:layout_centerHorizontal="true"
+                    android:text="example@example.com"
+                    android:textColor="#fff"
+                    android:textSize="14sp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/tach"
+                    android:layout_below="@+id/email"
+                    android:layout_centerHorizontal="true">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Trustometer"
+                        android:layout_gravity="center"
+                        android:textColor="@color/white"/>
+                    <com.daimajia.numberprogressbar.NumberProgressBar
+                        android:layout_width="200dp"
+                        android:layout_height="match_parent"
+                        android:id="@+id/prog"
+                        app:progress_max="10"
+                        app:progress_current="0"
+                        app:progress_text_color="@color/white"
+                        app:progress_text_size="13sp"
+                        app:progress_reached_color="@color/col1"
+                        app:progress_reached_bar_height="1.5dp"
+                        app:progress_unreached_bar_height="0.75dp"
+                        app:progress_unreached_color="@color/gray_white"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/tach"
+                    android:layout_marginRight="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Points : "
+                        android:textColor="@color/white"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/points"
+                        android:text="0"
+                        android:textSize="20sp"
+                        android:textColor="@color/col5"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="  pts"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_layout"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:background="#fff"
+                    android:clickable="true"
+                    android:textColor="@color/col2"
+                    android:id="@+id/country"
+                    android:elevation="4dp"
+                    android:padding="20dp"
+                    android:text="Country" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:id="@+id/city"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:background="#fff"
+                    android:textColor="@color/col2"
+                    android:clickable="true"
+                    android:elevation="4dp"
+                    android:padding="20dp"
+                    android:text="City" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="4"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:background="#fff"
+                    android:id="@+id/location"
+                    android:textColor="@color/col2"
+                    android:clickable="true"
+                    android:elevation="4dp"
+                    android:padding="20dp"
+                    android:text="Location" />
+
+                    <Button
+                        android:background="@drawable/rounded_rect"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        style="@style/button_style"
+                        android:text="Change"
+                        android:textSize="10sp"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/change"
+                        android:layout_alignParentRight="true"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:background="#fff"
+                    android:clickable="true"
+                    android:textColor="@color/col2"
+                    android:elevation="4dp"
+                    android:padding="20dp"
+                    android:id="@+id/phone"
+                    android:text="Phone" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:background="#fff"
+                    android:clickable="true"
+                    android:textColor="@color/col2"
+                    android:elevation="4dp"
+                    android:id="@+id/gender"
+                    android:padding="20dp"
+                    android:text="Gender" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_marginTop="3dp"
+                    android:background="#fff"
+                    android:textColor="@color/col2"
+                    android:textColorHint="@color/col2"
+                    android:clickable="true"
+                    android:elevation="4dp"
+                    android:padding="20dp"
+                    android:id="@+id/selectCity"
+                    android:hint="Select city"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Enable Receiving Notification : "
+                    android:layout_marginLeft="15dp"
+                    android:textSize="15sp"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/col2"
+                    android:layout_marginTop="5dp"/>
+
+                    <Switch
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/notify"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enable Receiving SMS : "
+                        android:layout_marginLeft="20dp"
+                        android:textSize="15sp"
+                        android:layout_marginRight="20dp"
+                        android:textColor="@color/col2"
+                        android:layout_marginTop="10dp"/>
+
+                    <Switch
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="20dp"
+                        android:id="@+id/sms"/>
+
+                </RelativeLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
