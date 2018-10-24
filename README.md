@@ -1,4 +1,4 @@
-# SPOFI
+# SpotFire
 
 ![appl_main_page](https://image.ibb.co/cvcEoA/page.png)
 ## Background
@@ -29,7 +29,7 @@ Images, videos, and people comments and reports can provide great help into buil
 
 1. A user reports an image or a video with an optional comment.
 2. To verify the report we used machine learning and deep learning techniques together with the Nasa Database and others to answer the questions:  
-- is the media fire related?  
+- Is the submission fire related?  
 - Are there elements in the scene that are a sign of wild or rural areas?  
 - Are there wild areas near the user?  
 - Do they have previous records of wildfires? And how they relate to NASA's wildlife tracking data?  
