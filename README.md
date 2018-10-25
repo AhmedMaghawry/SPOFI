@@ -1,60 +1,52 @@
 # SpotFire
 
-![appl_main_page](https://image.ibb.co/cvcEoA/page.png)
-## Background
+**Spotfire** is a crowd-sourcing tool that can support real-time detection and monitoring of wildfires; improving environmental safety to preserve it from wildfire risk.  
+**Spotfire**, allows users to report wildfires with different means, and provides experts with the means to monitor them, gain insights, make predictions and give warnings to potential disasters.
 
-Over the past year, we have witnessed long and arduous battles against record-breaking wildfires across the world.
+This project was designed for the NASA Space Apps 2018 Challenge. For the 30 seconds pitch video and more details, please visit NASA Space Apps 2018 Challenge [Page](https://2018.spaceappschallenge.org/challenges/volcanoes-icebergs-and-asteroids-oh-my/real-time-fire-app/teams/google-it/project).
 
-Some of these fires burned thousands of acres of land and destroyed hundreds of homes and buildings. Additionally, smoke from the fire creates issues related to poor air quality, raising health concerns for people not just in the vicinity of the fire, but at distances hundreds of miles away.
-
-**Major Causes**:  
-
-![causes](https://images-2018.spaceappschallenge.org/stream-images/Avy_WSLhB5J9Vdy3NZG39ZnHquc=/3482/width-800/)
-
-
-## Goal
-
-Building a Crowd-sourcing can support real-time detection and monitoring of natural disasters, including wildfires; improving environmental safety to preserve it from wildfire risk.
-
-Images, videos, and people comments and reports can provide great help into building a wide picture of the problem for it to be properly contained; allowing people even thousands of miles away, and even those without televisions, to watch live pictures.
-
-
-## Our Solution
-
-**Overview**:  
+### Overview  
 
 ![Overview](https://images-2018.spaceappschallenge.org/stream-images/rkAkDMFHltgmsY2zuLQKSWIZdj8=/3472/width-800/)
 
-**30 seconds pitch**: [Youtube video](https://www.youtube.com/watch?v=_S_XuIvyNfk&feature=youtu.be)
+# Getting Started
 
-1. A user reports an image or a video with an optional comment.
-2. To verify the report we used machine learning and deep learning techniques together with the Nasa Database and others to answer the questions:  
-- Is the submission fire related?  
-- Are there elements in the scene that are a sign of wild or rural areas?  
-- Are there wild areas near the user?  
-- Do they have previous records of wildfires? And how they relate to NASA's wildlife tracking data?  
-- Are there nearby people who report a similar incident?  
-- What is the weather info?  
-We also track the user's reporting history to build a trust rate. All these are put together to label a report as "fake" or "worthy" with a trust-meter
-3. Once verified, we notify close-by residents, subscribers, and local fire departments and hospitals.
-4- When you receive a notification you can view a map where fire locations are reported together with the users' reports, and you can confirm a report to increase its trust rate.  
-You can get help of how you can prepare for a wildfire, or get information about nearby emergencies.
+## Project Structure
 
-Heroes who helped early prevention of wildfires get special prizes and are announced on the social media to encourage them of good-doing and engage the public.
-With these in mind, our solution can greatly support real-time detection and monitoring of wildfires. It's simple, fast, and social. 
+```python
+SPOFI
+├── README.md #This File 
+├── requirements.txt # Python dependencies
+├── app # Android app
+├── core # Backend, main service and database handlers 
+    ├── data # All the open-data
+    └── server.py # server side (one-method interface to handel reports submissions)
+└── templates
+	└──  platform.html # frontpage
+```
 
+## Installation
 
-## Used Technologies
+Develop on your own environment
+First, clone the project
+``` bash
+$ git clone --recursive -j8 https://github.com/AhmedMaghawry/SPOFI.git
+```
 
-* Android
+## Requirments
+* Python 3.x
 * Firebase
-* Python
-* Keras, Tensorflow
+* Keras
+* Tensorflow
+* Pandas
+* Numpy
 
+Install all the prerequisites listed in requirements.txt by:
+``` bash
+$ pip install -r requirements.txt
+```
 
-## Improvements & future work
-
-![improvments](https://images-2018.spaceappschallenge.org/stream-images/oge9AJxEUuq2p80Q_JI3-iYOqKY=/3455/width-800/)
+Also, check the `README.md` file in the *core* folder.
 
 ## Contributers:
 * [Ahmed Rizk](https://github.com/AhmedMahmoudRizk) 
