@@ -21,6 +21,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.daimajia.numberprogressbar.NumberProgressBar;
+import com.ezzat.spofi.Control.FirebaseCallback;
+import com.ezzat.spofi.Control.FirebaseMethods;
+import com.ezzat.spofi.Control.Utils;
 import com.ezzat.spofi.Model.Location;
 import com.ezzat.spofi.Model.User;
 import com.ezzat.spofi.R;
@@ -38,7 +41,6 @@ public class ProfileActivity extends AppCompatActivity {
     private NumberProgressBar progressBar;
     private TextView username,email,points,country, city, locationTv, phone, gender;
     private Button change;
-    private LocationManager locationManager;
     private Switch notify, sms;
     TextView selectCity;
     String[] listItems;
@@ -65,6 +67,13 @@ public class ProfileActivity extends AppCompatActivity {
         notify = findViewById(R.id.notify);
         sms = findViewById(R.id.sms);
         addToViews();
+        FirebaseMethods.onUserChange(currentUser.getId(), new FirebaseCallback() {
+            @Override
+            public void onValueReturned(Object value) {
+                currentUser = (User)value;
+                addToViews();
+            }
+        });
     }
 
     private void addToViews() {
@@ -89,12 +98,15 @@ public class ProfileActivity extends AppCompatActivity {
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-                if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                if (!((LocationManager)getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     buildAlertMessageNoGps();
 
-                } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    getLocation();
+                } else if (((LocationManager)getSystemService(Context.LOCATION_SERVICE)).isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    Location location = Utils.getLocation(ProfileActivity.this, currentUser.getLocation());
+                    locationTv.setText(location.getLang() + " : " +location.getLat());
+                    country.setText(location.getCountry());
+                    city.setText(location.getCity());
+                    currentUser.setLocation(location);
                 }
                 // Write a message to the database
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -186,42 +198,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-
-    private void getLocation() {
-        if (ActivityCompat.checkSelfPermission(ProfileActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                (ProfileActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(ProfileActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
-        } else {
-            android.location.Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-
-            android.location.Location location1 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-            android.location.Location location2 = locationManager.getLastKnownLocation(LocationManager. PASSIVE_PROVIDER);
-
-            if (location != null) {
-                double latti = location.getLatitude();
-                double longi = location.getLongitude();
-                locationTv.setText(String.valueOf(latti) + " : " + String.valueOf(longi));
-                currentUser.setLocation(new Location(currentUser.getLocation().getCountry(), currentUser.getLocation().getCity(), String.valueOf(longi), String.valueOf(latti)));
-            } else  if (location1 != null) {
-                double latti = location1.getLatitude();
-                double longi = location1.getLongitude();
-                locationTv.setText(String.valueOf(latti) + " : " + String.valueOf(longi));
-                currentUser.setLocation(new Location(currentUser.getLocation().getCountry(), currentUser.getLocation().getCity(), String.valueOf(longi), String.valueOf(latti)));
-            } else  if (location2 != null) {
-                double latti = location2.getLatitude();
-                double longi = location2.getLongitude();
-                locationTv.setText(String.valueOf(latti) + " : " + String.valueOf(longi));
-                currentUser.setLocation(new Location(currentUser.getLocation().getCountry(), currentUser.getLocation().getCity(), String.valueOf(longi), String.valueOf(latti)));
-            }else{
-                Toast.makeText(ProfileActivity.this,"Unble to Trace your location",Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     protected void buildAlertMessageNoGps() {

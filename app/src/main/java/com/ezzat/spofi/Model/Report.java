@@ -120,4 +120,10 @@ public class Report implements Serializable {
     public void setScore(int score) {
         this.score = score;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        Report re = (Report) obj;
+        return re.getReportId().equals(reportId);
+    }
 }

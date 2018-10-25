@@ -60,54 +60,33 @@ public class HistoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         no = view.findViewById(R.id.no);
-        if (reports != null)
-            reports.clear();
-        else
+        if (reports == null)
             reports = new ArrayList<>();
-        //reports = getReports();
-        getReports(new FirebaseCallback() {
+        else
+            reports.clear();
+
+        FirebaseMethods.getReports(currentUser.getReportsId(), new FirebaseCallback() {
             @Override
             public void onValueReturned(Object value) {
-                if (value == null)
-                    reports = new ArrayList<>();
-                else
-                    reports = (List<Report>) value;
+                for (Report r : (ArrayList<Report>)value) {
+                    reports.add(r);
+                }
+
                 if (reports.size() == 0) {
                     no.setVisibility(View.VISIBLE);
                     recyclerView.setVisibility(View.GONE);
                 } else {
                     recyclerView.setVisibility(View.VISIBLE);
                     no.setVisibility(View.GONE);
-                    adapter = new RVAdapter(getActivity(), reports);
-                    RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
-                    recyclerView.setLayoutManager(mLayoutManager);
-                    recyclerView.setAdapter(adapter);
                 }
+
+                adapter = new RVAdapter(getActivity(), reports);
+                RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 1);
+                recyclerView.setLayoutManager(mLayoutManager);
+                recyclerView.setAdapter(adapter);
             }
         });
         return view;
-    }
-
-    public void getReports(final FirebaseCallback callback) {
-        /*List<Report> reports = new ArrayList<>();
-        Report report1 = new Report("Ahmed Ezzat", 5, new Location("Alex", "Egypt", 12, 12), "24-9-2011", "14:30", "dasdad", ReportType.Photo);
-        report1.setComment("Fiiiiire");
-        Report report2 = new Report("Ahmed Ezzat", 5, new Location("Alex", "Egypt", 12, 12), "08-1-2016", "14:30", "dasdad", ReportType.Photo);
-        report2.setComment("Fiiiiire 2 ");
-        reports.add(report1);
-        reports.add(report2);
-        return reports;*/
-        if (currentUser == null) {
-            callback.onValueReturned(null);
-            return;
-        }
-        FirebaseMethods.getReports(currentUser.getReportsId(), new FirebaseCallback() {
-            @Override
-            public void onValueReturned(Object value) {
-                callback.onValueReturned(value);
-                //adapter.notifyDataSetChanged();
-            }
-        });
     }
 
     public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RVViewHolder> {
@@ -161,5 +140,27 @@ public class HistoryFragment extends Fragment {
         }
     }
 
+    public void addReport(Report report){
+        reports.add(report);
+        notifyList();
+    }
 
+    public void verifyReport(Report report) {
+        if (reports.contains(report)) {
+            reports.remove(report);
+            reports.add(report);
+            notifyList();
+        }
+    }
+
+    public void notifyList() {
+        adapter.notifyDataSetChanged();
+        if (reports.size() == 0) {
+            no.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);
+            no.setVisibility(View.GONE);
+        }
+    }
 }

@@ -54,4 +54,9 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">12sp</item>
     </style>
+
+    <style name="pop" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:itemBackground">@color/col2</item>
+    </style>
 </resources>

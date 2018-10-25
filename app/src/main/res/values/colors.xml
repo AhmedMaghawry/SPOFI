@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#c93938</color>
-    <color name="colorPrimaryDark">#c93938</color>
+    <color name="colorPrimary">#ac2a29</color>
+    <color name="colorPrimaryDark">#ac2a29</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="col1">#FCAA67</color>
-    <color name="col2">#c93938</color>
+    <color name="col2">#f2ac2a29</color>
+    <color name="col2_1">#f26c2020</color>
+    <color name="col2_2">#f2ed0a08</color>
     <color name="col2_tr">#77c93938</color>
     <color name="col3">#FCFF4B</color>
     <color name="col4">#DD7373</color>

@@ -8,8 +8,8 @@
         android:id="@+id/not"
         android:orderInCategory="300"
         android:title="notification"
-        android:icon="@drawable/notf_norm"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/notif_off"
+        app:showAsAction="always"/>
 
     <item
         android:id="@+id/option"

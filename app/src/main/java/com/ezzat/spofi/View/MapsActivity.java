@@ -1,8 +1,13 @@
 package com.ezzat.spofi.View;
 
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Build;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
@@ -61,7 +66,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationRequest mLocationRequest;
         double latitude, longitude;
         double end_latitude, end_longitude;
-        private ImageButton help;
+        private ImageButton help, emrg;
         private Marker addedMarker;
         private LinearLayout layoutBottomSheet;
         private BottomSheetBehavior sheetBehavior;
@@ -105,10 +110,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             });
             help = findViewById(R.id.help);
+            emrg = findViewById(R.id.emrg);
             help.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Utils.launchActivity(MapsActivity.this, HelpActivity.class, null);
+                }
+            });
+
+            emrg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Utils.launchActivity(MapsActivity.this, EmergActivity.class, null);
                 }
             });
             //todo : get it dynamic
@@ -264,6 +277,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             mMap.setOnMarkerDragListener(this);
             mMap.setOnMarkerClickListener(this);
+            mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
 
         }
@@ -457,9 +471,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             LatLng latLng = new LatLng(lat, lng);
             markerOptions.position(latLng);
             markerOptions.title(report.getReportId());
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            markerOptions.icon(bitmapDescriptorFromVector(this,R.drawable.fire_marker));
             addedMarker = mMap.addMarker(markerOptions);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
         }
+
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, @DrawableRes int vectorDrawableResourceId) {
+        Drawable background = ContextCompat.getDrawable(context, R.drawable.fire_marker);
+        background.setBounds(0, 0, background.getIntrinsicWidth(), background.getIntrinsicHeight());
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorDrawableResourceId);
+        vectorDrawable.setBounds(40, 20, vectorDrawable.getIntrinsicWidth() + 40, vectorDrawable.getIntrinsicHeight() + 20);
+        Bitmap bitmap = Bitmap.createBitmap(background.getIntrinsicWidth(), background.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        background.draw(canvas);
+        vectorDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
 }

@@ -12,6 +12,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.ezzat.spofi.R;
@@ -27,7 +28,7 @@ public class BaseActivity extends AppCompatActivity {
 
     protected Context mContext = null;
     protected Activity mActivity = null;
-    protected CoordinatorLayout mCoordinatorLayout = null;
+    protected LinearLayout mCoordinatorLayout = null;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,7 +74,6 @@ public class BaseActivity extends AppCompatActivity {
         Intent i = new Intent(mContext, activityClass);
         i.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(i);
-        finish();
     }
 
     @Override

@@ -18,7 +18,7 @@
         android:layout_height="0dp"
         android:layout_weight="4"
         android:id="@+id/report_img"
-        android:scaleType="center"
+        android:scaleType="centerCrop"
         android:layout_margin="20dp"/>
 
     <TextView
