@@ -19,16 +19,39 @@
         android:layout_weight="4"
         android:id="@+id/report_img"
         android:scaleType="centerCrop"
-        android:layout_margin="20dp"/>
-
+        android:layout_margin="10dp"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:textSize="20sp"
         android:id="@+id/report_com"
         android:textColor="@color/black"
         android:text="Comment"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/report_date"
+        android:textColor="@color/black"
+        android:text="Date"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/report_co"
+        android:textColor="@color/black"
+        android:text="Country"
+        android:gravity="center"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:id="@+id/report_ci"
+        android:textColor="@color/black"
+        android:text="City"
         android:gravity="center"/>
 
 </LinearLayout>

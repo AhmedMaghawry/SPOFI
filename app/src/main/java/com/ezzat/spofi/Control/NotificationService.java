@@ -9,8 +9,13 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.ezzat.spofi.Model.Report;
+import com.ezzat.spofi.View.HomeActivity;
 import com.google.firebase.database.DataSnapshot;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -36,13 +41,16 @@ public class NotificationService extends Service {
         FirebaseMethods.onReportsChange(new FirebaseCallback() {
             @Override
             public void onValueReturned(Object value) {
-                Utils.sendNotification(getApplicationContext());
-                try {
-                    Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                    Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-                    r.play();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                Report r = (Report) value;
+                if (repotInTime(r) && reportInRange(r)) {
+                    Utils.sendNotification(getApplicationContext());
+                    try {
+                        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                        Ringtone re = RingtoneManager.getRingtone(getApplicationContext(), notification);
+                        re.play();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }, null, null);
@@ -104,5 +112,40 @@ public class NotificationService extends Service {
                 });
             }
         };
+    }
+
+    private boolean reportInRange(Report report) {
+        float[] distance = new float[2];
+        com.ezzat.spofi.Model.Location location = Utils.getLocation(getApplicationContext(), report.getLocation());
+        android.location.Location.distanceBetween(Double.parseDouble(report.getLocation().getLat()),
+                Double.parseDouble(report.getLocation().getLang()),
+                Double.parseDouble(location.getLat()),
+                Double.parseDouble(location.getLang()),
+                distance);
+
+        if ( distance[0] <= 1609.34)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private boolean repotInTime(Report report) {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        Date now = new Date();
+        Date convertedDate = new Date();
+        try {
+            convertedDate = sdfDate.parse(report.getDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Log.i("dodTime", now.getDay() - convertedDate.getDay() + "");
+        boolean val = now.getYear() == convertedDate.getYear() &&
+                now.getMonth() == convertedDate.getMonth() &&
+                Math.abs(now.getDay() - convertedDate.getDay()) <= 1;
+        return val;
     }
 }

@@ -19,7 +19,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class FirebaseMethods {
@@ -167,15 +171,16 @@ public class FirebaseMethods {
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Report report = dataSnapshot.getValue(Report.class);
                 if (reportAdded != null)
-                    reportAdded.onValueReturned(dataSnapshot);
+                    reportAdded.onValueReturned(report);
             }
 
             @SuppressLint("NewApi")
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 Report report = dataSnapshot.getValue(Report.class);
-                if (report.getState() == ReportState.Verified && reportInRange(report)) {
+                if (report.getState() == ReportState.Verified) {
                     if (reportVerified != null)
                         reportVerified.onValueReturned(report);
                 } else {
@@ -199,11 +204,6 @@ public class FirebaseMethods {
 
             }
         });
-    }
-
-    private static boolean reportInRange(Report report) {
-        //TODO::Check if it is in range
-        return true;
     }
 
     public static void onUserChange(final String userId, final FirebaseCallback userChanged) {

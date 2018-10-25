@@ -28,6 +28,7 @@ import com.ezzat.spofi.Control.FirebaseCallback;
 import com.ezzat.spofi.Control.FirebaseMethods;
 import com.ezzat.spofi.Control.Utils;
 import com.ezzat.spofi.Model.Report;
+import com.ezzat.spofi.Model.ReportState;
 import com.ezzat.spofi.Model.ReportType;
 import com.ezzat.spofi.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -47,7 +48,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -71,7 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         private LinearLayout layoutBottomSheet;
         private BottomSheetBehavior sheetBehavior;
         private ImageView imageView;
-        private TextView comment;
+        private TextView comment, country, city, date;
 
         ArrayList<Double> latitudes,longitudes;
         ArrayList<Report> reports;
@@ -124,10 +128,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Utils.launchActivity(MapsActivity.this, EmergActivity.class, null);
                 }
             });
-            //todo : get it dynamic
             latitudes = new ArrayList<>();
             longitudes = new ArrayList<>();
             reports = new ArrayList<>();
+            FirebaseMethods.onReportsChange(null, new FirebaseCallback() {
+                @Override
+                public void onValueReturned(Object value) {
+                    Report r = (Report) value;
+                    if (r.getState() == ReportState.Verified && reportInRange(r) && repotInTime(r)) {
+                        Log.i("dodTime", r.getDate());
+                        reports.add(r);
+                        latitudes.add(Double.parseDouble(r.getLocation().getLat()));
+                        longitudes.add(Double.parseDouble(r.getLocation().getLang()));
+                    }
+                }
+            }, null);
             /*final double distanceComp = 1609.34;
             FirebaseMethods.getAllReports(new FirebaseCallback() {
                 @Override
@@ -147,15 +162,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             /*latitudes.add(31.2381608);
             longitudes.add(29.9712006);*/
-            latitudes.add(31.239692);
+            /*latitudes.add(31.239692);
             longitudes.add(29.9693056);
             latitudes.add(31.2408226);
             longitudes.add(29.9734445);
             latitudes.add(31.2426954);
-            longitudes.add(29.9714656);
+            longitudes.add(29.9714656);*/
             /*latitudes.add(31.2372878);
             longitudes.add(29.9672778);*/
-            Report report = new Report(" ownerName",1,new com.ezzat.spofi.Model.Location("Egypt", "Alex","1.22","1.22"), " date","hour", "contentUrl", ReportType.Video);
+            /*Report report = new Report(" ownerName",1,new com.ezzat.spofi.Model.Location("Egypt", "Alex","1.22","1.22"), " date","hour", "contentUrl", ReportType.Video);
             report.setReportId("-LPDCl8toHAozLUOmr57");
             report.setComment("sadasdasda");
 
@@ -164,7 +179,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             reports.add(report);
             reports.add(report);
             //reports.add(report);
-            //reports.add(report);
+            //reports.add(report);*/
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 checkLocationPermission();
             }
@@ -189,6 +204,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         } else {
             sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+    }
+
+    private static boolean repotInTime(Report report) {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        Date now = new Date();
+        Date convertedDate = new Date();
+        try {
+            convertedDate = sdfDate.parse(report.getDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Log.i("dodTime", now.getDay() - convertedDate.getDay() + "");
+        boolean val = now.getYear() == convertedDate.getYear() &&
+                now.getMonth() == convertedDate.getMonth() &&
+                Math.abs(now.getDay() - convertedDate.getDay()) <= 1;
+        return val;
+    }
+
+    private boolean reportInRange(Report report) {
+        float[] distance = new float[2];
+        com.ezzat.spofi.Model.Location location = Utils.getLocation(MapsActivity.this, report.getLocation());
+        Location.distanceBetween(Double.parseDouble(report.getLocation().getLat()),
+                Double.parseDouble(report.getLocation().getLang()),
+                Double.parseDouble(location.getLat()),
+                Double.parseDouble(location.getLang()),
+                distance);
+
+        if ( distance[0] <= 1609.34)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
@@ -385,7 +435,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onLocationChanged", "Removing Location Updates");
             }
 
-        CircleOptions circleOptions = new CircleOptions().center(latLng).radius(900.0).fillColor(R.color.red).strokeColor(R.color.colorPrimary).strokeWidth(3f);
+        CircleOptions circleOptions = new CircleOptions().center(latLng).radius(1609.34).fillColor(R.color.red).strokeColor(R.color.colorPrimary).strokeWidth(3f);
         mMap.addCircle(circleOptions);
             drawPlaces();
         }
@@ -428,6 +478,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         @Override
         public boolean onMarkerClick(Marker marker) {
             marker.setDraggable(true);
+            marker.hideInfoWindow();
                 FirebaseMethods.getReport(marker.getTitle(), new FirebaseCallback() {
                        @Override
                        public void onValueReturned(Object value) {
@@ -438,6 +489,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                           Glide.with(getApplicationContext()).load(re.getContentUrl())
                                    .thumbnail(0.5f)
                                    .into(imageView);
+                          date = findViewById(R.id.report_date);
+                          date.setText(re.getDate());
+                          country = findViewById(R.id.report_co);
+                          country.setText(re.getLocation().getCountry());
+                           city = findViewById(R.id.report_ci);
+                           city.setText(re.getLocation().getCity());
                           toggleBottomSheet();
                        }
                 });

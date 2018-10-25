@@ -76,6 +76,8 @@ import com.yalantis.contextmenu.lib.MenuParams;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemClickListener;
 import com.yalantis.contextmenu.lib.interfaces.OnMenuItemLongClickListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -145,7 +147,9 @@ public class HomeActivity extends BaseActivity implements OnMenuItemClickListene
                     FirebaseMethods.onReportsChange(new FirebaseCallback() {
                         @Override
                         public void onValueReturned(Object value) {
-                            reportVer((Report) value);
+                            Report r = (Report) value;
+                            if (reportInRange(r) && repotInTime(r))
+                                reportVer((Report) value);
                         }
                     }, null, null);
 
@@ -361,7 +365,10 @@ public class HomeActivity extends BaseActivity implements OnMenuItemClickListene
                                 // Get a URL to the uploaded content
                                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                                 Location loc = Utils.getLocation(self, currentUser.getLocation());
-                                final Report report = new Report(currentUser.getName(), currentUser.getRate(), loc, Calendar.getInstance().getTime().toString(), String.valueOf(Calendar.getInstance().get(Calendar.HOUR_OF_DAY)),downloadUrl.toString(), requestCode == 0 ? ReportType.Photo : ReportType.Video);
+                                SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+                                Date now = new Date();
+                                String strDate = sdfDate.format(now);
+                                final Report report = new Report(currentUser.getName(), currentUser.getRate(), loc, strDate, String.valueOf(Calendar.getInstance().get(Calendar.HOUR_OF_DAY)),downloadUrl.toString(), requestCode == 0 ? ReportType.Photo : ReportType.Video);
                                 DatabaseReference pp = myRef.push();
                                 report.setReportId(pp.getKey());
                                 if (comment.getText() == null || comment.getText().toString().equals("")) {
@@ -430,5 +437,40 @@ public class HomeActivity extends BaseActivity implements OnMenuItemClickListene
         } catch (Exception e) {
             e.printStackTrace();
         }*/
+    }
+
+    private boolean reportInRange(Report report) {
+        float[] distance = new float[2];
+        com.ezzat.spofi.Model.Location location = Utils.getLocation(HomeActivity.this, report.getLocation());
+        android.location.Location.distanceBetween(Double.parseDouble(report.getLocation().getLat()),
+                Double.parseDouble(report.getLocation().getLang()),
+                Double.parseDouble(location.getLat()),
+                Double.parseDouble(location.getLang()),
+                distance);
+
+        if ( distance[0] <= 1609.34)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private boolean repotInTime(Report report) {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        Date now = new Date();
+        Date convertedDate = new Date();
+        try {
+            convertedDate = sdfDate.parse(report.getDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Log.i("dodTime", now.getDay() - convertedDate.getDay() + "");
+        boolean val = now.getYear() == convertedDate.getYear() &&
+                now.getMonth() == convertedDate.getMonth() &&
+                Math.abs(now.getDay() - convertedDate.getDay()) <= 1;
+        return val;
     }
 }
