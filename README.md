@@ -22,6 +22,8 @@ SPOFI
     ├── data # All the open-data
     └── server.py # server side (one-method interface to handel reports submissions)
 └── templates
+	├── css
+	├── js
 	└──  platform.html # frontpage
 ```
 
