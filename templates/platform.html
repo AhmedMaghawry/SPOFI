@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link id="theme-style" rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="markers/fire.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>SpotFire | Make the world safer</title>
+    <script>
+        $(document)
+        .ready(function() {
+            // actions for addBox
+            $("#viewbox1")
+                .click(function() {
+                  $("#overlay").fadeIn();
+                    $("#box1")
+                        .fadeIn();
+                   
+                });
+
+            $("#closebox1")
+                .click(function() {
+                    $("#box1")
+                        .fadeOut();
+                    $("#overlay").fadeOut();
+            });
+
+            // box 2
+            $("#viewbox2")
+                .click(function() {
+                  $("#overlay").fadeIn();
+                    $("#box2")
+                        .fadeIn();
+                   
+                });
+
+            $("#closebox2")
+                .click(function() {
+                    $("#box2")
+                        .fadeOut();
+                    $("#overlay").fadeOut();
+            });
+        });
+  
+          function toggle(button) {
+            button.style.background = "linear-gradient(0deg, #000,#000)";
+            choice = 0
+            if (button.id == "all") {
+              choice = 0
+              document.getElementById("reports").style.background = "linear-gradient(0deg, #630202, #b3120e)";
+              document.getElementById("fires").style.background = "linear-gradient(0deg, #630202, #b3120e)";
+            } else if (button.id == "reports"){
+              choice = 1
+              document.getElementById("all").style.background = "linear-gradient(0deg, #630202, #b3120e)";
+              document.getElementById("fires").style.background = "linear-gradient(0deg, #630202, #b3120e)";
+            } else{
+              choice = 2
+              document.getElementById("all").style.background = "linear-gradient(0deg, #630202, #b3120e)";
+              document.getElementById("reports").style.background = "linear-gradient(0deg, #630202, #b3120e)";
+            }
+            view_custom_data(choice);
+          }
+    </script>
+</head>
+<style type="text/css">
+    span {
+        display: block;
+        margin: 0 0 3px;
+        font-size: 1.2em;
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+
+    .action-buttons {
+        position: absolute;
+        bottom: 10px;
+        left: 30%;
+        margin: auto;
+    }
+
+    .map-buttons {
+        position: absolute;
+        top: 25%;
+        left: 10px;
+        z-index: 500;
+    }
+
+    .lmvSidebar li {
+        text-align: center;
+        width: 100px;
+        padding: 5px;
+        box-sizing: border-box;
+        color: white;
+        background: linear-gradient(0deg, #630202, #b3120e);
+        cursor: pointer;
+    }
+
+    .lmvSidebar li:hover {
+        background: linear-gradient(0deg, #630202, #630202);
+    }
+
+    .button {
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px;
+        margin: 4px 2px;
+        border: hidden;
+        -webkit-transition-duration: 0.4s;
+        /* Safari */
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+
+    .button1 {
+        float: left;
+        margin-top: 28px;
+        background-color: green;
+        color: white;
+    }
+
+    .button1:hover {
+        background-color: white;
+        color: green;
+    }
+
+    .button2 {
+        float: left;
+        margin-top: 28px;
+        background-color: red;
+        color: white;
+    }
+
+    .button2:hover {
+        background-color: white;
+        color: red;
+    }
+
+    .closeBtn {
+        color: #0e345a;
+        padding: 5px;
+        float: left;
+        cursor: pointer;
+    }
+
+    .closeBtn:hover {
+        color: white;
+        background-color: #0e345a;
+    }
+
+    div#overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.83);
+        display: none;
+    }
+
+    .box {
+        z-index: 3;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 50%;
+        margin-left: -25%;
+        margin-top: -15%;
+        border: 0px solid;
+        border-radius: 12px;
+        background-color: white;
+        padding: 10px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+        display: none;
+    }
+
+    textarea {
+        min-width: 100%;
+        border: 1px solid #ba68c8;
+        padding-left: 0.8rem;
+    }
+
+    textarea::focus {
+        border: 1px solid #ba68c8;
+        box-shadow: 0 0 0 0.2rem rgba(186, 104, 200, .25);
+    }
+
+    textarea::placeholder {
+        font-weight: 300;
+    }
+</style>
+
+<body>
+    <div id="overlay"> </div>
+    
+    <div style="position: absolute; bottom: 0;left: 0;z-index: 500">
+        <input type="file" onchange="handleFiles(this.files)" accept=".csv"> 
+    </div>
+
+    <div id="map"></div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="js/lib/knockout-3.4.2.js"></script>
+    <script src="js/app.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCv_tl7s_ja1wQKj3HNUT7IJsTsroMi2I&v=3&callback=initMap" onerror="err()"></script>
+
+    <div class='map-buttons'>
+        <ul id="sidebar" style="display:block;" class="lmvSidebar">
+            <li id="all" style="background: linear-gradient(0deg, #000,#000)" onclick="toggle(this);">All Data</li>
+            <li id="reports" onclick="toggle(this);"><img src="imgs/fire.png"> Reports</li>
+            <li id="fires" onclick="toggle(this);"><img src="imgs/dot.png"> Active Fire Data</li>
+    </div>
+
+    <!-- action buttons div -->
+    <div class='action-buttons'>
+        <div style="float: left">
+            <button id="viewbox1" class="button button1"> Give us your insights/observation</button>
+        </div>
+        <div style="float: left">
+            <button id="viewbox2" class="button button2"> Give warning of a potential risk</button>
+        </div>
+    </div>
+
+    <!-- View insights Box -->
+    <div id="box1" class="box">
+        <span class="glyphicon glyphicon-remove closeBtn" id="closebox1"></span>
+        <br>
+        <hr>
+        <form method="post" action="SpotFire" style="padding:20px;">
+            <span>Location of interest:</span>
+            <input type="text" name="location" placeholder="e.g Continent, Country, City ...etc">
+            <br>
+            <span>Insights/Observations</span>
+            <textarea name="insight-textarea" rows="4" placeholder="Give us your insights and observations..."></textarea>
+        </form>
+    </div>
+    <!-- view warning box -->
+    <div id="box2" class="box">
+        <span class="glyphicon glyphicon-remove closeBtn" id="closebox2"></span>
+        <br>
+        <hr>
+        <form method="post" action="SpotFire" style="padding:20px;">
+            <span>Location of interest:</span>
+            <input type="text" name="location" placeholder="e.g Continent, Country, City ...etc">
+            <br>
+            <span>Warnings/potential risk</span>
+            <textarea name="insight-textarea" rows="4" placeholder="Give warning of a potential risk..."></textarea>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        //read_data("FireData.csv")
+    </script>
+</body>
+
+</html>

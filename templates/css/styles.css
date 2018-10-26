@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-family: Arial, sans-serif;
+    height: 100%;
+}
+#map {
+    height: 100%;
+}
+
+nav {
+    padding: 5px;
+    position: relative;
+    background: #B0B0B0;
+}
+nav::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+h3{
+    padding: inherit;
+    margin: 5px;
+    color: #383838;
+    display: inline;
+}
+
+input{
+    padding: inherit;
+    margin: 5px;
+}
+
+aside {
+    float: left;
+    width: 300px;
+    height: 100%;
+    background: #B0B0B0;
+    left: 0;
+    top: 0;
+    display: none;
+}
+aside::before {
+    content: "";
+    display: block;
+    height: 0px;
+}
+aside a {
+    display: block;
+    padding: 12px 18px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #383838;
+    border-bottom: 1px solid #818181;
+}
+.toggle-wrap {
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    position: relative;
+    cursor: pointer;
+    float: left;
+
+    /*disable selection*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.toggle-bar,
+.toggle-bar::before,
+.toggle-bar::after,
+.toggle-wrap.active .toggle-bar,
+.toggle-wrap.active .toggle-bar::before,
+.toggle-wrap.active .toggle-bar::after {
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+.toggle-bar {
+    width: 38px;
+    margin: 10px 0;
+    position: relative;
+    border-top: 6px solid #303030;
+    display: block;
+}
+.toggle-bar::before,
+.toggle-bar::after {
+    content: "";
+    display: block;
+    background: #303030;
+    height: 6px;
+    width: 38px;
+    position: absolute;
+    top: -16px;
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -ms-transform-origin: 13%;
+    -webkit-transform-origin: 13%;
+    transform-origin: 13%;
+}
+.toggle-bar::after {
+    top: 4px;
+}
+.toggle-wrap.active .toggle-bar {
+    border-top: 6px solid transparent;
+}
+.toggle-wrap.active .toggle-bar::before {
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.toggle-wrap.active .toggle-bar::after {
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
