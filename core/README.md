@@ -16,12 +16,19 @@
 
 Some used models have large sizes so we couldn't upload them.
 
-For the VGG16-places365 model, download it from:
+**Fire detection**  
+You can find details in:  
+https://breckon.org/toby/publications/papers/dunni...
 
+model download:  
+https://github.com/tobybreckon/fire-detection-cnn  
+
+
+**Scene classification**  
+For the VGG16-places365 model, download it from:  
 http://places2.csail.mit.edu/
 
-or from the repo:
-
+or from the repo:  
 https://github.com/GKalliatakis/Keras-VGG16-places365
 
 Then save the model as `VGG16_Places365.hdf5`
