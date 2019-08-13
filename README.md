@@ -8,6 +8,7 @@ This project was designed for the NASA Space Apps 2018 Challenge. For the 30 sec
 ### Overview  
 
 ![Overview](https://images-2018.spaceappschallenge.org/stream-images/rkAkDMFHltgmsY2zuLQKSWIZdj8=/3472/width-800/)
+![Overview](https://images-2018.spaceappschallenge.org/team-photos/A70k8m-L3tPrBaleQmaUgbD7lNY=/11665/width-800/)
 
 # Getting Started
 
