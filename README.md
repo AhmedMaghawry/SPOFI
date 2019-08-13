@@ -51,6 +51,7 @@ $ pip install -r requirements.txt
 Also, check the `README.md` file in the *core* folder.
 
 ## Contributers:
+* [Ahmed Ezzat](https://github.com/AhmedMaghawry) 
 * [Ahmed Rizk](https://github.com/AhmedMahmoudRizk) 
 * [Youssef Ahmed](https://github.com/youssef-ahmed)
 * [Yahia El-shahawy](https://github.com/yahia-elshahawy)
